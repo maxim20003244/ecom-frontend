@@ -11,14 +11,20 @@ export const productReducer = (state = initialState,action) =>{
         products:action.payload,
         pagination: {
              ...state.pagination,
-             pagepageNumber: action.pageNumber,
+             pageNumber: action.pageNumber,
              pageSize: action.pageSize,
              totalElements: action.totalElements,
              totalPages: action.totalPages,
-             lastPage: actionlastPage,
+             lastPage: action.lastPage,
         },
         };
-        default:
+        case "FETCH_PRODUCTS_ERROR":
+            return {
+              ...state,
+              loading: false,
+              error: action.payload,
+            };
+          default:
             return state;
    }
 };

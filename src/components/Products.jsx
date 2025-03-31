@@ -8,7 +8,7 @@ import { fetchProducts } from "../store/reducers/actions";
 const Products = () => {
     const isLoading = false;
     const errorMessage = '';
-    const {products} = useSelector(
+    const {products,loading ,error} = useSelector(
       (state)  => state.products
     );
     const dispatch = useDispatch();
@@ -16,56 +16,27 @@ const Products = () => {
 
     useEffect(() => {
       dispatch(fetchProducts())
-    },[dispatch])
+    },[dispatch]);
   
-  //  const products = [
-  //   {
-  //         productId: 652,
-  //         productName: "Iphone Xs max",
-  //         image: "https://placehold.co/600x400",
-  //         description: "Experience the latest in mobile technology with advanced cameras, powerful processing, and an all-day battery.",
-  //         quantity: 10,
-  //         price: 1450.0,
-  //         discount: 10.0,
-  //         specialPrice: 1305.0,
-  //       },
-  //       {
-  //         productId: 654,
-  //         productName: "MacBook Air M2s",
-  //         image: "https://placehold.co/600x400",
-  //         description: "Ultra-thin laptop with Apple's M2 chip, providing fast performance in a lightweight, portable design.",
-  //         quantity: 0,
-  //         price: 2550.0,
-  //         discount: 20.0,
-  //         specialPrice: 2040.0,
-  //       }
-  //   ] 
     return (
-        <div className="lg:px-14 sm:px-8 px-4 py-14 2x1:2-[90%] 2xl:mx-auto">
-           { isLoading ? (
-             <p>It is loading...</p>
-            ) : errorMessage ? (
-                 <div className="flex justify-center items-center h-[200]"> 
-                    <FaExclamationTriangle className="text-slate-800 text-3xl mr-2"/>
-                 <span className="text-slate-800 text-lg font-medium">
-                    {errorMessage}
-                 </span>
-                 </div>
-            ) : (
-                <div className="min-h-[700]">
-                     <div className="pb-6 pt-14 grid 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-y-6 gap-x-6">
-                      {products && 
-                       products.map(
-                        (item, i) => <ProductCard  key={i} {...item}/>
-                       )}
-
-                     </div>
-                </div>
-                
-            )}
-         
-        </div>
-      
-    )
+      <div className="lg:px-14 sm:px-8 px-4 py-14 2xl:max-w-[90%] 2xl:mx-auto">
+        {loading ? (
+          <p className="text-center text-lg font-medium text-blue-600">Loading...</p>
+        ) : error ? (
+          <div className="flex justify-center items-center h-40 bg-red-100 rounded p-4">
+            <FaExclamationTriangle className="text-red-600 text-2xl mr-2" />
+            <span className="text-red-600 text-lg font-medium">{error}</span>
+          </div>
+        ) : products && products.length > 0 ? (
+          <div className="grid 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-y-6 gap-x-6">
+            {products.map((item) => (
+              <ProductCard key={item.productId} {...item} />
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-gray-600">No products found.</p>
+        )}
+      </div>
+    );
 }
 export default Products;
