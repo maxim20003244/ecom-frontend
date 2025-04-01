@@ -3,6 +3,7 @@ import ProductCard from "./ProductCard";
 import {useDispatch, useSelector} from "react-redux"
 import { useEffect } from "react";
 import { fetchProducts } from "../store/reducers/actions";
+import Filter from "./Filter";
 
 
 const Products = () => {
@@ -19,7 +20,11 @@ const Products = () => {
     },[dispatch]);
     
     return (
+      
       <div className="lg:px-14 sm:px-8 px-4 py-14 2xl:max-w-[90%] 2xl:mx-auto">
+         <div className="mb-8">
+      <Filter />
+    </div>
         {isLoading ? (
           <p className="text-center text-lg font-medium text-blue-600">Loading...</p>
         ) : errorMessage ? (
