@@ -70,6 +70,7 @@ const Filter = () => {
     updatedParams.set("sortby", newOrder);
     navigate(`${pathname}?${updatedParams.toString()}`);
     setSortOrder(newOrder);
+    console.log("Sort order:", sortOrder);
   };
 
   const handleClearFilters = () => {
