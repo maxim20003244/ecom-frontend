@@ -10,3 +10,5 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+On commit 8 debug filter to working right, when I try to Sort by asc or desc order it's was sorted buy price. But the customer need to get the current price (special Price). Fix and set to sort by current price. 
