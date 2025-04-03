@@ -15,14 +15,8 @@ import {
 } from "@mui/material";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
-const Filter = () => {
-  const categories = [
-    { categoryId: 1, categoryName: "Electronics" },
-    { categoryId: 2, categoryName: "Clothing" },
-    { categoryId: 3, categoryName: "Furniture" },
-    { categoryId: 4, categoryName: "Books" },
-    { categoryId: 5, categoryName: "Toys" },
-  ];
+const Filter = ({categories}) => {
+    console.log("🧾 Categories in Filter:", categories);
 
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -105,10 +99,10 @@ const Filter = () => {
             onChange={handleCategoryChange}
           >
             <MenuItem value="all">All</MenuItem>
-            {categories.map((item) => (
-              <MenuItem key={item.categoryId} value={item.categoryName}>
+                        {categories.map((item) => (
+            <MenuItem key={item.categoryId} value={item.categoryName}>
                 {item.categoryName}
-              </MenuItem>
+            </MenuItem>
             ))}
           </Select>
         </FormControl>
