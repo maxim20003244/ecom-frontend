@@ -18,7 +18,7 @@ useEffect(() => {
 
     const backendParams = new URLSearchParams();
     backendParams.set("pageNumber", currentPage - 1);
-    backendParams.set("sortBy", "price");
+    backendParams.set("sortBy", "specialPrice");
     backendParams.set("sortOrder", sortOrder);
 
     if (categoryParams) backendParams.set("category", categoryParams);
