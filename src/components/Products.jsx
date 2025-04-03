@@ -5,6 +5,8 @@ import { useEffect } from "react";
 import { fetchCategories, fetchProducts } from "../store/reducers/actions";
 import Filter from "./Filter";
 import useProductFilter from "./useProductFilter";
+import { ThreeDots } from "react-loader-spinner";
+import Loader from "./Loader";
 
 
 const Products = () => {
@@ -28,8 +30,8 @@ const Products = () => {
          <div className="mb-8">
       <Filter  categories={categories ? categories : []}/>
     </div>
-        {isLoading ? (
-          <p className="text-center text-lg font-medium text-blue-600">Loading...</p>
+        {true? (
+         <Loader text={"Products Loading"} />
         ) : errorMessage ? (
           <div className="bg-red-100 text-red-700 p-3 rounded mb-4 text-center">
     🚫 {errorMessage}
