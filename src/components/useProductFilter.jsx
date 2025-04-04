@@ -15,11 +15,17 @@ useEffect(() => {
     const sortOrder = params.get("sortby") || "asc";
     const categoryParams = params.get("category") || null;
     const keyword = params.get("keyword") || null;
+    const pageSize = params.get("pageSize") || 4;
+
+    
 
     const backendParams = new URLSearchParams();
     backendParams.set("pageNumber", currentPage - 1);
+    backendParams.set("pageSize", pageSize);
     backendParams.set("sortBy", "specialPrice");
     backendParams.set("sortOrder", sortOrder);
+   
+
 
     if (categoryParams) backendParams.set("category", categoryParams);
     if (keyword) backendParams.set("keyword", keyword);

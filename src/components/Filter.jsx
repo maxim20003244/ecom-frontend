@@ -49,11 +49,13 @@ const Filter = ({categories}) => {
   const handleCategoryChange = (event) => {
     const selectedCategory = event.target.value;
     const updatedParams = new URLSearchParams(searchParams.toString());
-    if (selectedCategory === "all") {
-      updatedParams.delete("category");
-    } else {
-      updatedParams.set("category", selectedCategory);
-    }
+    
+  if (selectedCategory.toLowerCase() === "all") {
+    updatedParams.delete("category"); // ✅ Remove filter from URL
+  } else {
+    updatedParams.set("category", selectedCategory);
+  }
+    updatedParams.set("page", "1");
     navigate(`${pathname}?${updatedParams.toString()}`);
     setCategory(selectedCategory);
   };
@@ -108,6 +110,7 @@ const Filter = ({categories}) => {
         </FormControl>
 
         {/* Sort Button */}
+        <div className="flex flex-col sm:flex-row gap-4 items-center">
         <Tooltip title={`Sort by price: ${sortOrder}`}> 
           <Button
             variant="contained"
@@ -127,6 +130,32 @@ const Filter = ({categories}) => {
             {sortOrder === "asc" ? <FiArrowUp size={18} /> : <FiArrowDown size={18} />}
           </Button>
         </Tooltip>
+    </div>
+        {/* slecet products on the page  */}
+
+
+        <Tooltip >
+        <FormControl size="small" sx={{ minWidth: 140 }}>
+  <InputLabel id="page-size-label">Per Page</InputLabel>
+  <Select
+    labelId="page-size-label"
+    id="page-size-select"
+    value={searchParams.get("pageSize") || "4"} // default fallback
+    label="Per Page"
+    onChange={(e) => {
+      const updatedParams = new URLSearchParams(searchParams.toString());
+      updatedParams.set("pageSize", e.target.value); // ✅ set new size
+      updatedParams.set("page", "1"); // ✅ always reset to page 1
+      navigate(`${pathname}?${updatedParams.toString()}`);
+    }}
+  >
+    <MenuItem value={4}>4</MenuItem>
+    <MenuItem value={8}>8</MenuItem>
+    <MenuItem value={12}>12</MenuItem>
+    <MenuItem value={20}>20</MenuItem>
+  </Select>
+</FormControl>
+</Tooltip>
 
         {/* Clear Filter Button */}
         <button

@@ -7,13 +7,14 @@ import Filter from "./Filter";
 import useProductFilter from "./useProductFilter";
 import { ThreeDots } from "react-loader-spinner";
 import Loader from "./Loader";
+import Paginations from "./Paginations";
 
 
 const Products = () => {
   const { isLoading, errorMessage } = useSelector(
     (state) => state.errors);
   
-    const {products,categories} = useSelector(
+    const {products,categories,pagination} = useSelector(
       (state)  => state.products
     );
     const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const Products = () => {
          <div className="mb-8">
       <Filter  categories={categories ? categories : []}/>
     </div>
-        {true? (
+        {isLoading? (
          <Loader text={"Products Loading"} />
         ) : errorMessage ? (
           <div className="bg-red-100 text-red-700 p-3 rounded mb-4 text-center">
@@ -41,10 +42,16 @@ const Products = () => {
             {products.map((item) => (
               <ProductCard key={item.productId} {...item} />
             ))}
+           
           </div>
         ) : (
           <p className="text-center text-gray-600">No products found.</p>
         )}
+         <div className="flex justify-center pt-10">
+            <Paginations 
+                numberOfPage = {pagination?.totalPages} 
+                totalProducts = {pagination?.totalElements} />
+            </div>
       </div>
     );
 }
