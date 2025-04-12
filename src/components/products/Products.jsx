@@ -1,13 +1,13 @@
 import { FaExclamationTriangle } from "react-icons/fa";
-import ProductCard from "./ProductCard";
+import ProductCard from "../shared/ProductCard";
 import {useDispatch, useSelector} from "react-redux"
 import { useEffect } from "react";
-import { fetchCategories, fetchProducts } from "../store/reducers/actions";
+import { fetchCategories, fetchProducts } from "../../store/reducers/actions";
 import Filter from "./Filter";
-import useProductFilter from "./useProductFilter";
+import useProductFilter from "../../hooks/useProductFilter";
 import { ThreeDots } from "react-loader-spinner";
-import Loader from "./Loader";
-import Paginations from "./Paginations";
+import Loader from "../shared/Loader";
+import Paginations from "../shared/Paginations";
 
 
 const Products = () => {

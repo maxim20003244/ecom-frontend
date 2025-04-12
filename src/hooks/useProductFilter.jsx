@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { fetchProducts } from "../store/reducers/actions";
 
 const useProductFilter = ()=> {
 const [searchParams] = useSearchParams ();
 const dispatch = useDispatch();
+const location = useLocation();
 
 
 useEffect(() => {
@@ -15,7 +16,7 @@ useEffect(() => {
     const sortOrder = params.get("sortby") || "asc";
     const categoryParams = params.get("category") || null;
     const keyword = params.get("keyword") || null;
-    const pageSize = params.get("pageSize") || 4;
+    const pageSize = params.get("pageSize") || 8;
 
     
 

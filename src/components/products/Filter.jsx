@@ -140,7 +140,7 @@ const Filter = ({categories}) => {
   <Select
     labelId="page-size-label"
     id="page-size-select"
-    value={searchParams.get("pageSize") || "4"} // default fallback
+    value={searchParams.get("pageSize") || "8"} // default fallback
     label="Per Page"
     onChange={(e) => {
       const updatedParams = new URLSearchParams(searchParams.toString());
