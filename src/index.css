@@ -1,3 +1,19 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+@theme{
+    /* --color-*: initial; */
+  --color-white: #fff;
+  --color-purple: #3f3cbb;
+  --color-midnight: #121063;
+  --color-tahiti: #3ab7bf;
+  --color-bermuda: #78dcca;
+  --color-color1: #FDC200;
+  --color-color2: #FF2C2C;
+  --color-color3: #21AD61;
+  --color-color4: #723DA6;
+   
+      
+         
+    
+}
