@@ -4,6 +4,9 @@ import Products from './components/products/Products'
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom'
 import Home from './components/home/Home'
 import Navbar from './components/shared/Navbar'
+import About from './components/About'
+import Layout from './components/shared/Layout'
+
 
 
 function App() {
@@ -14,10 +17,11 @@ function App() {
      
        <Router>
           <Navbar/>
-         <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/products' element={<Products/>}/>
-         </Routes>
+          <Routes>
+      <Route path="/" element={<Layout><Home /></Layout>} />
+      <Route path="/about" element={<Layout><About /></Layout>} />
+      <Route path="/products" element={<Layout><Products /></Layout>} />
+    </Routes>
 
        </Router>
      
