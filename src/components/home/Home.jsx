@@ -16,7 +16,7 @@ const Home = () => {
       dispatch(fetchProducts());
    }, [dispatch]);
  return (
-    <div className="lg:px-14 sm:px-8 px-4">
+    <div className="pt-[70px] not-first:lg:px-14 sm:px-8 px-4">
       <div className="py-6">
       <HeroBanner/>
       </div>
@@ -32,7 +32,7 @@ const Home = () => {
 
          {isLoading ? (
             <Loader/>
-         ) : true ? (
+         ) : errorMessage ? (
             <div className="bg-red-100 text-red-700 p-3 rounded mb-4 text-center">
             🚫 {errorMessage}
           </div>
@@ -41,7 +41,7 @@ const Home = () => {
     
      <div className="mt-12 grid 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-y-6 gap-x-6">
             {products &&
-            products?.slice(0,8)
+            products?.slice(0,4)
             .map((item) => (
               <ProductCard key={item.productId} {...item} />
             ))}
