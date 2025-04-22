@@ -23,7 +23,7 @@ const onChangeHandler = (event,value) =>{
          defaultPage={1} 
          siblingCount={0}
          boundaryCount={2}
-         shape="circle" 
+         shape="circular" 
          onChange={onChangeHandler}/>
 
     )

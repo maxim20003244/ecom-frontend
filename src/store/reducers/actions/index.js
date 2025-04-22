@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import api from "../../../api/api";
 
 export const fetchProducts = (queryString) => async (dispatch) => {
@@ -69,4 +70,41 @@ export const fetchCategories = (queryString) => async (dispatch) => {
         });
     
     }
+  };
+
+  export const addToCart = (data, qty = 1) => (dispatch, getState) => {
+    const { products } = getState().products;
+    const { cart } = getState().carts;
+  
+    const product = products.find(
+      (item) => item.productId === data.productId
+    );
+    const cartItem = cart.find(
+      (item) => item.productId === data.productId
+    );
+  
+    const alreadyInCartQty = cartItem?.quantity || 0;
+    const totalRequestedQty = alreadyInCartQty + qty;
+  
+    const inStock =
+      product && product.quantity >= totalRequestedQty;
+  
+    if (!inStock) {
+      toast.error("❌ Out of stock");
+      return;
+    }
+  
+    const updatedItem = { ...data, quantity: totalRequestedQty };
+  
+    dispatch({
+      type: "ADD_CART",
+      payload: updatedItem,
+    });
+  
+    // Save to localStorage
+    setTimeout(() => {
+      const updatedCart = getState().carts.cart;
+      toast.success(`${data?.productName} added to the cart`)
+      localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+    }, 0);
   };

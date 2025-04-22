@@ -2,6 +2,9 @@ import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import ProductViewModal from "../shared/ProductViewModal" ;
 import { truncateText } from "../../utils.js/truncateText";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/reducers/actions";
+import toast from "react-hot-toast";
 
 const ProductCard = ({
     productId,
@@ -19,12 +22,16 @@ const ProductCard = ({
     const btnloader = false;
     const [selectedViewProduct,setSelectedViewProduct ] = useState('');
     const isAvailable = quantity && Number(quantity) > 0;
+    const dispatch = useDispatch();
    
     const handleProductView = (product) => {
       if(!about) {
         setSelectedViewProduct(product);
         setOpenProductViewModal(true);
       }
+    }
+    const addToCarHandler = ( cartItems) =>{
+      dispatch(addToCart(cartItems,1, toast));
     }
     return (
         <div className="border rounded-lg shadow-xl overflow-hidden transition-shadow duration-300">
@@ -96,10 +103,18 @@ const ProductCard = ({
    {isAvailable ? (
      <button
        disabled={btnloader}
-       onClick={() => {
-         if (btnloader) return;
-         console.log("Add to cart clicked");
-       }}
+       onClick={() => addToCarHandler({
+          image,
+          productName,
+          description,
+          specialPrice,
+          price,
+          productId,
+          quantity,
+          
+ 
+       })}
+       
        className={`inline-flex items-center gap-2 px-4 py-2 text-white rounded transition ${
          btnloader
            ? 'bg-blue-300 cursor-not-allowed'
