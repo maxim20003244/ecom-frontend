@@ -1,0 +1,79 @@
+import { useState } from "react";
+import { HiOutlineTrash } from "react-icons/hi";
+import SetQuantity from "./SetQuantity";
+
+const ItemContetnt = ({
+          productId,
+          productName,
+          image,
+          description,
+          quantity,
+          price ,
+          discount,
+          specialPrice,
+          cartId,
+}) => {
+
+   
+    const [currentQuantity, setCurrentQuantity] = useState(quantity);
+return (
+<div className="grid md:grid-cols-5 grid-cols-4 gap-4 items-center border-b py-4 px-2 hover:bg-slate-50 transition">
+  {/* Product (image + name) */}
+  <div className="md:col-span-2 col-span-2 flex items-center gap-4">
+    {/* Image wrapper */}
+    <div className="w-20 h-20 flex-shrink-0">
+      <img
+        src={image}
+        alt={productName}
+        className="w-full h-full object-cover rounded-md border"
+      />
+    </div>
+
+    {/* Text info */}
+    <div>
+      <h3 className="lg:text-[15px] text-sm font-semibold text-slate-700">
+        {productName}
+      </h3>
+      <p className="text-xs text-gray-500">Product details or short note</p>
+    </div>
+  </div>
+
+  {/* Price */}
+  <div className="justify-self-center lg:text-[17px] text-sm text-slate-600 font-semibold">
+  {"$ " + (Number(specialPrice) % 1 === 0 
+  ? Number(specialPrice) 
+  : Number(specialPrice).toFixed(2))}
+   
+  </div>
+
+  {/* Quantity */}
+  <div className="text-center">
+    <SetQuantity 
+    quantity={currentQuantity}
+    cardCounter={true}
+    handleQtyIncrease={()=>{}} 
+    handleQtyDecrease={()=>{}} 
+    />
+
+    
+  </div>
+
+  {/* Total */}
+  <div className="text-center flex flex-col items-center gap-2">
+    <span className="font-semibold text-gray-800">
+      ${(specialPrice* quantity).toFixed(2)}
+    </span>
+    <button
+      onClick={() => handleRemoveFromCart(productId)}
+      className="flex items-center gap-1 text-red-500 text-sm hover:text-red-600 transition"
+      
+    >
+        <HiOutlineTrash size={16} className="text-rose-600"/>
+        
+      Remove
+    </button>
+  </div>
+</div>
+)
+};
+export default ItemContetnt;
