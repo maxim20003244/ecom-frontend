@@ -8,6 +8,7 @@ import About from './components/About'
 import Layout from './components/shared/Layout'
 import Contact from './components/Contact'
 import { Toaster } from 'react-hot-toast'
+import Cart from './components/cart/Cart'
 
 
 
@@ -24,6 +25,7 @@ function App() {
       <Route path="/about" element={<Layout><About /></Layout>} />
       <Route path="/products" element={<Layout><Products /></Layout>} />
       <Route path="/contact" element={<Layout><Contact/></Layout>} />
+      <Route path="/cart" element={<Layout><Cart/></Layout>} />
     </Routes>
 
        </Router>
