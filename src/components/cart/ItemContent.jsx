@@ -1,6 +1,11 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+
 import { HiOutlineTrash } from "react-icons/hi";
 import SetQuantity from "./SetQuantity";
+import { useDispatch } from "react-redux";
+import { decreaseCartQuantity, increaseCartQunatity } from "../../store/reducers/actions";
+import toast from "react-hot-toast";
 
 const ItemContetnt = ({
           productId,
@@ -13,9 +18,47 @@ const ItemContetnt = ({
           specialPrice,
           cartId,
 }) => {
+    
 
-   
-    const [currentQuantity, setCurrentQuantity] = useState(quantity);
+    const dispatch = useDispatch();
+    const cartItem = useSelector((state) =>
+        state.carts.cart.find((item) => item.productId === productId)
+      );
+      const currentQuantity = cartItem?.quantity || 1;
+
+      
+      const handleQtyIncrease = () => {
+        const cartItem = {
+          image,
+          productName,
+          description,
+          specialPrice,
+          price,
+          productId,
+          cartId
+        };
+      
+        dispatch(
+          increaseCartQunatity(cartItem, toast, currentQuantity)
+        );
+      };
+
+     const handleQtyDecrease = () => {
+        const cartItem = {
+            image,
+            productName,
+            description,
+            specialPrice,
+            price,
+            productId,
+            cartId
+          };
+
+          dispatch(
+            decreaseCartQuantity(cartItem,toast, currentQuantity)
+          );
+     };
+
 return (
 <div className="grid md:grid-cols-5 grid-cols-4 gap-4 items-center border-b py-4 px-2 hover:bg-slate-50 transition">
   {/* Product (image + name) */}
@@ -48,21 +91,21 @@ return (
 
   {/* Quantity */}
   <div className="text-center">
-    <SetQuantity 
-    quantity={currentQuantity}
-    cardCounter={true}
-    handleQtyIncrease={()=>{}} 
-    handleQtyDecrease={()=>{}} 
-    />
+  <SetQuantity
+  quantity={currentQuantity}
+  cardCounter={true}
+  handleQtyIncrease={handleQtyIncrease}
+  handleQtyDecrease={handleQtyDecrease}
+/>
 
     
   </div>
 
   {/* Total */}
   <div className="text-center flex flex-col items-center gap-2">
-    <span className="font-semibold text-gray-800">
-      ${(specialPrice* quantity).toFixed(2)}
-    </span>
+   <span className="font-semibold text-gray-800">
+  ${(specialPrice * currentQuantity).toFixed(2)}
+</span>
     <button
       onClick={() => handleRemoveFromCart(productId)}
       className="flex items-center gap-1 text-red-500 text-sm hover:text-red-600 transition"

@@ -108,3 +108,65 @@ export const fetchCategories = (queryString) => async (dispatch) => {
       localStorage.setItem("cartItems", JSON.stringify(updatedCart));
     }, 0);
   };
+
+  export const increaseCartQunatity = (data, toast, currentQuantity) =>
+    (dispatch, getState) => {
+      const products = getState().products.products;
+  
+      if (!products || !Array.isArray(products)) {
+        toast.error("Product list is not available.");
+        return;
+      }
+      
+      const product = products.find(
+        (item) => item.productId === data.productId
+      );
+  
+      if (!product) {
+        toast.error("Product not found.");
+        return;
+      }
+  
+      const isQuantityExist = product.quantity >= currentQuantity + 1;
+  
+      if (isQuantityExist) {
+        console.log("✅ Quantity Increased")
+        const newQuantity = currentQuantity + 1;
+  
+        dispatch({
+          type: "ADD_CART",
+          payload: { ...data, quantity: newQuantity },
+        });
+  
+        localStorage.setItem(
+          "cartItems",
+          JSON.stringify(getState().carts.cart)
+        );
+        toast.success(`${data.productName} quantity updated to ${newQuantity}`);
+      } else {
+        toast.error("Quantity reached the limit");
+      }
+    };
+
+    export const decreaseCartQuantity = (data, toast, currentQuantity) => {
+      return (dispatch, getState) => {
+        if (currentQuantity <= 1) {
+          toast.error("❌ Minimum quantity is 1");
+          return;
+        }
+    
+        const newQuantity = currentQuantity - 1;
+    
+        dispatch({
+          type: "ADD_CART",
+          payload: { ...data, quantity: newQuantity },
+        });
+    
+        localStorage.setItem(
+          "cartItems",
+          JSON.stringify(getState().carts.cart)
+        );
+    
+        toast.success(`${data.productName} quantity decreased to ${newQuantity}`);
+      };
+    };

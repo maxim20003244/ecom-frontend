@@ -19,6 +19,7 @@ return (
         <span className="min-w-[24px] text-center">{quantity}</span>
         <button
           onClick={handleQtyIncrease}
+          
           className="px-2 text-lg font-semibold hover:text-green-600"
         >
           +
