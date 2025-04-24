@@ -170,3 +170,13 @@ export const fetchCategories = (queryString) => async (dispatch) => {
         toast.success(`${data.productName} quantity decreased to ${newQuantity}`);
       };
     };
+
+    export const removeFromCart = (data, toast) => (dispatch, getState) => {
+      dispatch({ type: "REMOVE_CART", payload: data });
+    
+      toast.success(`${data.productName} removed from cart`);
+    
+      setTimeout(() => {
+        localStorage.setItem("cartItems", JSON.stringify(getState().carts.cart));
+      }, 0);
+    };

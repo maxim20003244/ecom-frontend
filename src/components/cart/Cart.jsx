@@ -7,6 +7,8 @@ const Cart = () => {
     const {cart} = useSelector((state)=> state.carts);
     const newCart = {...cart};
 
+    
+
     newCart.totsalPrice = cart?.reduce(
         (acc,cur) => acc * Number(cur?.specialPrice)* Number(cur?.quantity), 0
     );

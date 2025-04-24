@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { useSelector } from "react-redux";
-
 import { HiOutlineTrash } from "react-icons/hi";
 import SetQuantity from "./SetQuantity";
 import { useDispatch } from "react-redux";
-import { decreaseCartQuantity, increaseCartQunatity } from "../../store/reducers/actions";
+import { decreaseCartQuantity, increaseCartQunatity, removeFromCart } from "../../store/reducers/actions";
 import toast from "react-hot-toast";
 
 const ItemContetnt = ({
@@ -59,6 +57,20 @@ const ItemContetnt = ({
           );
      };
 
+     const handleRemoveFromCart = () => {
+        const item = {
+          image,
+          productName,
+          description,
+          specialPrice,
+          price,
+          productId,
+          quantity,
+        };
+      
+        dispatch(removeFromCart(item, toast));
+      };
+
 return (
 <div className="grid md:grid-cols-5 grid-cols-4 gap-4 items-center border-b py-4 px-2 hover:bg-slate-50 transition">
   {/* Product (image + name) */}
@@ -107,8 +119,16 @@ return (
   ${(specialPrice * currentQuantity).toFixed(2)}
 </span>
     <button
-      onClick={() => handleRemoveFromCart(productId)}
-      className="flex items-center gap-1 text-red-500 text-sm hover:text-red-600 transition"
+      onClick={()=> handleRemoveFromCart({
+        image,
+        productName,
+        description,
+        specialPrice,
+        price,
+        productId,
+       quantity,
+      })}
+      className="flex items-center gap-1 text-red-500 text-sm hover:text-red-600 transition cursor-grab"
       
     >
         <HiOutlineTrash size={16} className="text-rose-600"/>
