@@ -4,6 +4,8 @@ import SetQuantity from "./SetQuantity";
 import { useDispatch } from "react-redux";
 import { decreaseCartQuantity, increaseCartQunatity, removeFromCart } from "../../store/reducers/actions";
 import toast from "react-hot-toast";
+import { truncateText } from "../../utils.js/truncateText";
+import { formatPrice } from "../../utils.js/formaTPRICE.JS";
 
 const ItemContetnt = ({
           productId,
@@ -87,7 +89,7 @@ return (
     {/* Text info */}
     <div>
       <h3 className="lg:text-[15px] text-sm font-semibold text-slate-700">
-        {productName}
+        {truncateText(productName)}
       </h3>
       <p className="text-xs text-gray-500">Product details or short note</p>
     </div>
@@ -95,9 +97,7 @@ return (
 
   {/* Price */}
   <div className="justify-self-center lg:text-[17px] text-sm text-slate-600 font-semibold">
-  {"$ " + (Number(specialPrice) % 1 === 0 
-  ? Number(specialPrice) 
-  : Number(specialPrice).toFixed(2))}
+  <span>{formatPrice(specialPrice)}</span>
    
   </div>
 
