@@ -2,6 +2,7 @@ import {MdArrowBack, MdShoppingCart} from "react-icons/md"
 import { Link } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux"
 import ItemContetnt from "./ItemContent";
+import CartEmpty from "./CartEmpty" ;
 const Cart = () => {
     const dispatch = useDispatch();
     const {cart} = useSelector((state)=> state.carts);
@@ -15,9 +16,7 @@ const Cart = () => {
 
     if(!cart || cart.length === 0)
         return  (
-        <h1>
-      Cart is Empty
-        </h1>
+<CartEmpty />
         )
     
 return (

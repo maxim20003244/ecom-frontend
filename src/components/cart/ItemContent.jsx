@@ -128,7 +128,7 @@ return (
         productId,
        quantity,
       })}
-      className="flex items-center gap-1 text-red-500 text-sm hover:text-red-600 transition cursor-grab"
+      className="flex items-center gap-1 text-red-400  hover:text-red-600 transition cursor-pointer"
       
     >
         <HiOutlineTrash size={16} className="text-rose-600"/>

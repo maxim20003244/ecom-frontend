@@ -16,6 +16,9 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
+
+
+    
     <React.Fragment>
      
        <Router>
@@ -29,7 +32,7 @@ function App() {
     </Routes>
 
        </Router>
-       <Toaster position='bottom-center'/>
+       <Toaster position='top-center'/>
        </React.Fragment>
      
   )

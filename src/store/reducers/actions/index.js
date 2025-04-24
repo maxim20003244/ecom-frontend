@@ -1,4 +1,4 @@
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import api from "../../../api/api";
 
 export const fetchProducts = (queryString) => async (dispatch) => {
@@ -166,7 +166,7 @@ export const fetchCategories = (queryString) => async (dispatch) => {
           "cartItems",
           JSON.stringify(getState().carts.cart)
         );
-    
+      
         toast.success(`${data.productName} quantity decreased to ${newQuantity}`);
       };
     };
