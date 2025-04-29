@@ -9,6 +9,7 @@ import Layout from './components/shared/Layout'
 import Contact from './components/Contact'
 import { Toaster } from 'react-hot-toast'
 import Cart from './components/cart/Cart'
+import LogIn from './components/auth/Login'
 
 
 
@@ -29,6 +30,7 @@ function App() {
       <Route path="/products" element={<Layout><Products /></Layout>} />
       <Route path="/contact" element={<Layout><Contact/></Layout>} />
       <Route path="/cart" element={<Layout><Cart/></Layout>} />
+      <Route path="/login" element={<Layout><LogIn/></Layout>} />
     </Routes>
 
        </Router>

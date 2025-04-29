@@ -1,4 +1,4 @@
- const IputField = ({
+ const InputField = ({
    label,
    id,
    type,
@@ -56,3 +56,4 @@
         </div>
       )
  };
+ export default InputField;
