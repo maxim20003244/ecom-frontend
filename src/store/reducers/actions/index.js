@@ -180,3 +180,28 @@ export const fetchCategories = (queryString) => async (dispatch) => {
         localStorage.setItem("cartItems", JSON.stringify(getState().carts.cart));
       }, 0);
     };
+
+
+    export const authenticateSignInUser
+
+     = (sendData,toast,reset,navigate,setLoader) => async (dispatch) => {
+      console.log("trigeer")
+      try {
+        
+        setLoader(true);
+        const {data} = await api.post(`/auth/signin`,sendData);
+        dispatch({type: "LOGIN_USER", payload: data})
+        localStorage.setItem("auth", JSON.stringify(data))
+        reset()
+        toast.success("Login Success")
+        navigate("/");
+      } catch (error) {
+        console.log(error);
+        toast.error(error?.response?.data?.message || "Internal Server error");
+        
+      }
+      finally{
+        setLoader(false);
+      }
+      
+    }

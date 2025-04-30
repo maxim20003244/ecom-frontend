@@ -3,6 +3,7 @@ import { productReducer } from "./ProductReducer";
 import { errorReducer } from "./errorReducer";
 import {cartReducer} from "./cartReducer";
 import { authReducer } from "./authReducer";
+import {thunk} from "redux-thunk";
 
 const cartItems = localStorage.getItem("cartItems")
     ? JSON.parse(localStorage.getItem("cartItems"))
@@ -19,14 +20,14 @@ const user = localStorage.getItem("auth")
        
      }
 
-export const store  = configureStore({
-    reducer: {
-         products: productReducer,
-         errors : errorReducer,
-         carts: cartReducer,
-         auth: authReducer,
-
-    },
-    preloadedState: initialState
-});
+     export const store = configureStore({
+        reducer: {
+          products: productReducer,
+          errors: errorReducer,
+          carts: cartReducer,
+          auth: authReducer,
+        },
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
+        preloadedState: initialState,
+      });
 export default store;
